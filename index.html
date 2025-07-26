@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Blog website</h1>
+      <p>Explore articles, stories & ideas.</p>
+    </div>
+  </header>
+
+  <main id="blog-container">
+    <!-- Blog posts will appear here -->
+  </main>
+
+  <section id="new-post">
+    <h2>Create New Post</h2>
+    <input type="text" id="title" placeholder="Title" />
+    <input type="text" id="category" placeholder="Category" />
+    <input type="file" id="image-upload" accept="image/*" />
+    <textarea id="content" placeholder="Your blog content here..."></textarea>
+    <button onclick="addPost()">Publish</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
