@@ -1,15 +1,15 @@
 let posts = JSON.parse(localStorage.getItem("posts")) || [];
-const blogContainer = document.getElementById("blog-container");
-const categoryDropdown = document.getElementById("category-filter");
 
 function savePosts() {
   localStorage.setItem("posts", JSON.stringify(posts));
 }
 
 function renderPosts() {
+  const blogContainer = document.getElementById("blog-container");
   blogContainer.innerHTML = "";
+
   const searchQuery = document.getElementById("search-input").value.toLowerCase();
-  const selectedCategory = categoryDropdown.value;
+  const selectedCategory = document.getElementById("category-filter").value;
 
   posts.forEach((post, index) => {
     if (
@@ -18,6 +18,7 @@ function renderPosts() {
     ) {
       const postDiv = document.createElement("div");
       postDiv.classList.add("blog-post");
+
       postDiv.innerHTML = `
         <h3>${post.title}</h3>
         <p><strong>Category:</strong> ${post.category}</p>
@@ -28,9 +29,10 @@ function renderPosts() {
           <button class="comment-button">Comment</button>
           <div class="comment-list">${(post.comments || []).map(c => `<div class="comment">${c}</div>`).join("")}</div>
         </div>
+        <button class="delete-button">Delete Post</button>
       `;
 
-      // Add comment logic
+      // Handle comments
       postDiv.querySelector(".comment-button").onclick = () => {
         const input = postDiv.querySelector(".comment-input");
         if (input.value.trim() !== "") {
@@ -41,19 +43,30 @@ function renderPosts() {
         }
       };
 
+      // Handle deletion
+      postDiv.querySelector(".delete-button").onclick = () => {
+        if (confirm("Are you sure you want to delete this post?")) {
+          posts.splice(index, 1);
+          savePosts();
+          renderPosts();
+          updateCategoryDropdown();
+        }
+      };
+
       blogContainer.appendChild(postDiv);
     }
   });
 }
 
 function updateCategoryDropdown() {
-  const categories = [...new Set(posts.map(post => post.category))];
-  categoryDropdown.innerHTML = '<option value="">All Categories</option>';
-  categories.forEach(cat => {
+  const dropdown = document.getElementById("category-filter");
+  const uniqueCategories = [...new Set(posts.map(p => p.category))];
+  dropdown.innerHTML = '<option value="">All Categories</option>';
+  uniqueCategories.forEach(cat => {
     const option = document.createElement("option");
     option.value = cat;
     option.textContent = cat;
-    categoryDropdown.appendChild(option);
+    dropdown.appendChild(option);
   });
 }
 
@@ -61,11 +74,10 @@ function addPost() {
   const title = document.getElementById("title").value;
   const category = document.getElementById("category").value;
   const content = document.getElementById("content").value;
-  const imageInput = document.getElementById("image-upload");
-  const imageFile = imageInput.files[0];
+  const imageFile = document.getElementById("image-upload").files[0];
 
   if (!title || !category || !content || !imageFile) {
-    alert("Please fill in all fields and select an image.");
+    alert("Please fill in all fields and upload an image.");
     return;
   }
 
@@ -83,7 +95,7 @@ function addPost() {
     renderPosts();
     updateCategoryDropdown();
 
-    // Clear inputs
+    // Reset form
     document.getElementById("title").value = "";
     document.getElementById("category").value = "";
     document.getElementById("content").value = "";
@@ -93,8 +105,8 @@ function addPost() {
 }
 
 document.getElementById("search-input").addEventListener("input", renderPosts);
-categoryDropdown.addEventListener("change", renderPosts);
+document.getElementById("category-filter").addEventListener("change", renderPosts);
 
-// Initial load
+// Load everything
 renderPosts();
 updateCategoryDropdown();
