@@ -13,14 +13,22 @@ body {
   border-bottom: 2px solid #FFC107;
 }
 
-.hero-content h1 {
+.hero h1 {
   font-size: 3rem;
   color: #FFC107;
 }
 
-.hero-content p {
+.hero p {
   color: #ccc;
-  font-size: 1.2rem;
+}
+
+#search-input, #category-filter {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background-color: #1C1C1C;
+  color: white;
 }
 
 #blog-container {
@@ -41,7 +49,6 @@ body {
 
 .blog-post img {
   max-width: 100%;
-  height: auto;
   border-radius: 8px;
   margin: 15px 0;
 }
@@ -54,47 +61,34 @@ body {
   width: 100%;
   padding: 10px;
   background-color: #111;
-  color: #fff;
   border: 1px solid #333;
   border-radius: 6px;
-  margin-bottom: 10px;
+  color: white;
 }
 
 .comment-button {
-  padding: 8px 16px;
   background-color: #FFC107;
   color: #000;
+  padding: 8px 16px;
+  margin-top: 5px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-}
-
-.comment-button:hover {
-  background-color: #e6b700;
-}
-
-.comment-list {
-  margin-top: 10px;
-  padding-left: 20px;
 }
 
 .comment {
   background-color: #2a2a2a;
   padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  color: #ccc;
+  margin-top: 5px;
+  border-radius: 6px;
+  color: #ddd;
 }
 
 #new-post {
   padding: 30px 20px;
   background-color: #111;
   border-top: 2px solid #FFC107;
-}
-
-#new-post h2 {
-  color: #FFC107;
 }
 
 #new-post input,
@@ -108,24 +102,12 @@ body {
   border-radius: 8px;
 }
 
-#image-upload {
-  padding: 10px;
-  background-color: #1C1C1C;
-  color: #fff;
-}
-
 #new-post button {
-  padding: 12px 24px;
   background-color: #FFC107;
+  padding: 12px 24px;
   color: #000;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-#new-post button:hover {
-  background-color: #e6b700;
 }
 
